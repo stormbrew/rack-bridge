@@ -1,6 +1,6 @@
 = rack-bridge
 
-Description goes here.
+Rack-Bridge provides a rack-based server for connecting to 
 
 == Note on Patches/Pull Requests
  

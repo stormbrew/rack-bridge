@@ -46,13 +46,10 @@ module Bridge
     attr_reader :bridge_server
     
     def initialize(options = DefaultOptions)
-      puts(options.inspect)
       super(DefaultOptions.merge(options))
-      puts(@options.inspect)
-      puts(self.class::DefaultOptions.inspect)
+
       @use_key_files = @options[:UseKeyFiles]
-      @keys = @options[:Keys].split(",")
-      
+
       hosts, @bridge_server = @host.split("@", 2)
       if (@bridge_server.nil?)
         # no bridge specified, we expect there to be a single host
@@ -74,12 +71,13 @@ module Bridge
           h
         end
       end.flatten
-      
+
+      @keys = @options[:Keys].split(",")
+      @keys << ENV["BRIDGE_KEYS"] if (ENV["BRIDGE_KEYS"])
       if (@use_key_files)
         @keys << Bridge::KeyTools.load_keys(@listen_hosts)
-        @keys.flatten!
       end
-      puts(self.inspect)
+      @keys.flatten!
     end
     
     def create_listener(options)
