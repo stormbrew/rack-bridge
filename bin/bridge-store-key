@@ -1,0 +1,44 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'bridge/key_tools'
+
+user_path = Bridge::KeyTools.user_path
+global_path = Bridge::KeyTools.global_path
+site_path = Bridge::KeyTools.site_path
+
+type = :user
+opt = OptionParser.new do |opts|
+  opts.banner = "Usage: #{$0} [options] KEY"
+  
+  if (user_path)
+    opts.on("u", "--user", "Add to the user registry (#{user_path}) DEFAULT") do
+      type = :user
+    end
+  end
+  
+  if (global_path)
+    opts.on("g", "--global", "Add to the global registry (#{global_path})") do
+      type = :global
+    end
+  end
+  
+  if (site_path)
+    opts.on("s", "--site", "Add to the site registry (#{site_path})") do
+      type = :site
+    end
+  end
+  
+  opts.on("h", "--help", "Show this help") do
+    puts(opts)
+    exit(1)
+  end
+end
+opt.parse!
+key = ARGV.shift
+if (!key)
+  puts("Must supply a key!")
+  puts(opt)
+  exit(1)
+end
+
+Bridge::KeyTools.save_key(key, type)
