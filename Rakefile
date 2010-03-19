@@ -10,7 +10,7 @@ begin
     gem.homepage = "http://github.com/stormbrew/rack-bridge"
     gem.email = "megan@stormbrew.ca"
     gem.authors = ["Megan Batty"]
-    gem.add_dependency "jaws", "= 0.5.1"
+    gem.add_dependency "jaws", "= 0.6.0"
     gem.add_development_dependency "rspec", ">= 1.2.9"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
