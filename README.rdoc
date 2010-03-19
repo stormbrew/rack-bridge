@@ -1,6 +1,35 @@
 = rack-bridge
 
-Rack-Bridge provides a rack-based server for connecting to 
+Rack-Bridge provides a rack-based server for connecting to a BRIDGE-capable server (like CloudBridge). This can be used with any rack-capable framework that supports automatic loading of the handler, which includes at least rackup and rails. Examples for those two frameworks are below.
+
+== Examples
+
+Save a key you got from oncloud.org in your user key store:
+
+	bridge_store_key 1178fbd04c4aea4c8a7f09627bbf67df83a51805:1267585275:pickles.oncloud.org
+	
+Save a key you got from oncloud.org in your app's key store:
+
+	bridge_store_key --site 1178fbd04c4aea4c8a7f09627bbf67df83a51805:1267585275:pickles.oncloud.org
+
+Use Rackup to connect to pickles.oncloud.org (assumes you stored the key as above):
+
+	rackup -s Bridge -o pickles.oncloud.org config.ru
+	
+Use Rails >= 2.3 to connect to pickles.oncloud.org (assumes you stored the key as above):
+
+	script/server Bridge -b pickles.oncloud.org
+	
+Specify a key through the environment without saving it:
+
+	BRIDGE_KEYS=1178fbd04c4aea4c8a7f09627bbf67df83a51805:1267585275:pickles.oncloud.org rackup -s Bridge -o pickles.oncloud.org config.ru
+	BRIDGE_KEYS=1178fbd04c4aea4c8a7f09627bbf67df83a51805:1267585275:pickles.oncloud.org script/server Bridge -b pickles.oncloud.org
+
+== More Information
+
+CloudBridge: http://www.github.com/stormbrew/cloudbridge
+OnCloud: http://www.oncloud.org
+Summary of CloudBridge/OnCloud: http://www.stormbrew.ca/2010/03/18/oncloud-org-and-cloudbridge-and-how-the-web-is-like-donkey-kong-country/
 
 == Note on Patches/Pull Requests
  
