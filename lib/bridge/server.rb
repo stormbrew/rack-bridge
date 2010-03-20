@@ -65,7 +65,7 @@ module Bridge
       @listen_hosts = hosts.collect do |h|
         # We need to expand *blah into *.blah and blah. This is a client-side
         # convenience, not something the server deals with.
-        if (match = %r{^\*[^\.](.+)$}.match(h))
+        if (match = %r{^\*([^\.].+)$}.match(h))
           ["*." << match[1], match[1]]
         else
           h
